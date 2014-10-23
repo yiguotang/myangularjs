@@ -1,4 +1,4 @@
 myangularjs
 ===========
 
-the practices of stuy angular
+the practices of study angular.
