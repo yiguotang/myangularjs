@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>xxx系统</title>
+		<link href="resources/themes/default/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="config.js"></script>
+		<link rel="stylesheet" type="text/css" href="lib/angelui/resources/ztree/zTreeStyle/zTreeStyle.css">
+		<script type="text/javascript" src="lib/angelui/vendor/require.js" data-main="lib/angelui/main"></script>
+	</head>	
+	<body id="ng-app" ng-controller="indexCtrl">
+		<!--头，导航部分-->
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<div class="btn-group pull-right">						
+						<span ng-bing="currentTime"></span>
+						<span ng-bing="username"></span>
+						<a href="#" class="setUp" title="设置中心">设置中心</a>
+						<a href="#" class="help" title="帮助中心">帮助中心</a>
+						<a href="#" class="large" title="全屏" id="fullScreenBtn">全屏</a>
+						<a href="javascript:if(window.confirm('确认退出平台？') == true) window.location.href='login.html';" class="out" title="退出系统">退出系统</a>					
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end 头，导航部分-->
+
+		<!--主体，包括左侧导航和右侧主体-->
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<!--左侧导航-->
+				<div class="span3">
+					<div style="height:50px"></div>
+					<div class="leftNavBox">
+						<dl class="LNB_topbg" ng-class="{'hide-mode':expand}" ng-repeat="menu in permissionModules" ng-init="expand = true">
+							<dt ng-click="expand=!expand"><span ng-bind="menu.label"></span></dt>
+							<dd ng-repeat="submenu in menu.submenus">
+								<a href="#" ng-click="menuClick(submenu)" title="{{submenu.label}}" ng-class="submenu.iconClass"><span ng-bind="submenu.label"></span></a>
+							</dd>
+						</dl>
+					</div>
+					
+					<div class="well sidebar-nav">
+						<ul class="nav nav-list">
+			              <li class="nav-header"><i class="icon-wrench"></i> 管理</li>
+			              <li><a href="users.html">用户</a></li>
+			              <li><a href="roles.html">角色</a></li>
+			              <li class="nav-header"><i class="icon-signal"></i> 统计</li>
+			              <li class="active"><a href="stats.html">通用</a></li>
+			              <li><a href="user-stats.html">用户</a></li>
+			              <li><a href="visitor-stats.html">访问者</a></li>
+			              <li class="nav-header"><i class="icon-user"></i> 资料</li>
+			              <li><a href="my-profile.html">我的资料</a></li>
+			              <li><a href="#">设置</a></li>
+						  <li><a href="#">退出</a></li> 
+			            </ul>
+					</div>
+				</div>				
+				<!--end左侧导航-->
+
+				<!--右侧主体-->
+				<div class="span9">
+					<div style="height:60px"></div>
+					
+					<!--导航-->
+						<div>
+							<ul>
+								<li ng-repeat="module in permissionModules" ng-class="{selected:isMenuActive(module)}">
+									<a href="#" ng-class="module.iconClass" ng-click="menuClick(module)"><span ng-bind="module.label"></span></a>
+								</li>
+							</ul>
+						<!--历史记录
+						<div class="historyBox dropdown" ng-show="tabs.length>0">
+							<a href="#" class="HBbt dropdown-toggle" title="历史记录">历史记录</a>
+							<dl class="HBlist dropdown-memnu">
+								<dd ng-repeat="tab in tabs">
+									<a href="#" ng-click="activeTab(tab.appName,tab.param)"><span ng-bind="tab.text"></span></a>
+									<a href="#" class="delBt" ng-click="closeTab(tab.appName,tab.param)">删除</a>
+								</dd>
+							</dl>
+						</div>
+						-->
+						<!--end 历史记录-->
+						</div>
+					<!--end 导航-->
+					
+					<div ng-repeat="tab in tabs" ng-include="tab.templateUrl" ng-show="tab.active" class="tabContent"></div>
+
+				</div>
+				<!--end右侧主体-->
+			</div>
+		</div>
+		<!--end 主体，包括左侧导航和右侧主体-->
+	</body>
+</html>

@@ -1,0 +1,87 @@
+<html ng-app="myApp">
+
+<head>
+	<meta charset="utf-8">
+	<title>表单元素</title>
+    <style type="text/css">
+    .odd {
+        background-color: blue;
+    }
+    .even {
+        background-color: red;
+    }
+    </style>
+
+</head>
+
+<body>
+    <textarea ng-disabled="isDisabled">Wait 5 seconds enabled</textarea>
+
+    <br/>
+
+    <label>someProperties = <span ng-bind="someProperties"></span></label>
+    <input type="checkbox" ng-checked="someProperties" ng-init="someProperties = false" ng-model="someProperties" />
+
+    <br/>
+
+    <input type="text" ng-model="person.name" />
+    <div ng-switch on="person.name">
+        <p ng-swithc-default>And the winnter is</p>
+        <!-- 输出默认值 -->
+        <h1 ng-switch-when="Ari"><sapn ng-bind="person.name"></sapn></h1>
+    </div>
+
+    <br/>
+
+    <ul ng-controller="PeopleController">
+        <li ng-repeat="person in people" ng-class="{even:!$even, odd:!$odd}">
+           	<sapn ng-bind="person.name"></sapn> live in <span ng-bind="person.city"></span>
+        </li>
+    </ul>
+
+    <br/>
+
+    <div ng-init="greet='hello world'">
+        <p ng-cloak>{{greet}}</p> <!--作用与ng-bind一样-->
+    </div>
+
+    <br/>
+
+    <div ng-controller="EquationController">
+        <input type="text" ng-model="equation.x" ng-change="change()" />
+
+        <code><span ng-bind="equation.output"></span></code>
+
+    </div>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript">
+    var app = angular.module('myApp', []);
+
+    app.run(function($rootScope, $timeout) {
+        $rootScope.isDisabled = true;
+        $timeout(function() {
+            $rootScope.isDisabled = false;
+        }, 5000);
+    });
+
+    app.controller('PeopleController', function($scope) {
+        $scope.people = [{
+            name: "zhangsan",
+            city: "nanjing"
+        }, {
+            name: "lisi",
+            city: "wuhu"
+        }];
+    });
+
+    app.controller('EquationController', function($scope) {
+        $scope.equation = {};
+        $scope.change = function() {
+            $scope.equation.output = parseInt($scope.equation.x) + 2;
+        }
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>读取GitHub用户活动流</title>
+</head>
+<body>
+	
+	<div ng-controller="ServiceController">
+		<label for="username">输入GitHub的用户名：</label>
+		<input type="text" ng-model="username" placeholder="Enter a GitHub username" />
+		<ul>
+			<li ng-repeat="event in events">
+				<span ng-bind="event.actor.login"></span>
+				<span ng-bind="event.repo.name"></span>
+			</li>
+		</ul>
+	</div>
+
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular.min.js.map"></script>
+	<script>
+		angular.module('myApp.service', [])
+			.factory('githubService', ['$http', function($http){
+				var githubUrl = 'https://api.github.com';
+				var runUserRequest = function(username, path){
+					return $http({
+						method:'JSONP',
+						url: githubUrl + '/users/' + username + '/' + path + '?callback=JSON_CALLBACK'
+					});
+				};
+				return {
+					events: function(username){
+						return runUserRequest(username, 'events');
+					}
+				};
+			}]);
+		angular.module('myApp', ['myApp.service'])
+			.controller('ServiceController', ['$scope', '$timeout', 'githubService', function($scope, $timeout, githubService){
+				var timeout;
+				//使用$watch监视input的input，发生变化请求不同的数据给events
+				$scope.$watch('username', function(newUsername){
+					if (newUsername) {
+						//如果在进度中有一个超时（timeout）
+						if (timeout) {
+							$timeout.cancel(timeout);
+						};
+						//输入字段的两次变化之间延时350 ms
+						timeout = $timeout(function(){
+							githubService.events(newUsername)
+								.success(function(data, status, headers){
+									$scope.events = data.data;
+								});
+						}, 350);
+					};
+				})
+			}]);
+	</script>
+</body>
+</html>

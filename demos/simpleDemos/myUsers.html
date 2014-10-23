@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="">
+
+<head>
+	<meta charset="utf-8">
+	<title>ngInclude的使用</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body ng-controller="userController">
+
+    <div class="container">
+        <div ng-include="'myUsers_List.htm'"></div>
+        <div ng-include="'myUsers_Form.htm'"></div>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="myUsers.js"></script>
+
+</body>
+
+</html>

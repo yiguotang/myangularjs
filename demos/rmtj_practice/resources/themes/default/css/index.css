@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	font-family:'宋体','Arial';
+	margin:0;
+	padding:0;
+	font-size:14px;
+}
+
+p,ul,dl,li,dt,dd,ol,h1,h2,h3,h4,h5,h6{
+	padding:0;
+	margin:0;
+	list-style:none; 
+   }
+a{	 text-decoration:none;
+	 color:#0f0f0f;
+	 border:0;
+ }
+a:hover { } 
+.clearfix:after {clear:both;content:"\20";display:block;height:0;}
+.clearfix {zoom:1}
+
+.table-selectable > tbody > tr.selected > td {
+    background: #c0c0c0;
+}
+.modal-limited{
+    max-height: 400px;
+    overflow: auto;
+}

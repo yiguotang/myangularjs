@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MainApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>隐式依赖注入服务到Controller中</title>
+</head>
+
+<body>
+
+    <div ng-controller="MyController">
+        <input type="text" ng-model="msg">
+        <button ng-click="saveMsg()">save msg</button>
+        <ul>
+            <li ng-repeat="msg in msgs">{{msg}}</li>
+        </ul>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script>
+    var app = angular.module('MainApp', [], function($provide) {
+        $provide.factory('notify', ['$window', '$timeout', function(win, timeout) {
+            //这里是服务依赖，function的参数可以随意取，但是要与前面的依赖的顺序要一一对应
+            var msgs = [];
+            return function(msg) {
+                msgs.push(msg);
+                if (msgs.length == 3) {
+                    timeout(function() {
+                        win.alert(msgs.join('\n'));
+                        msgs = [];
+                    }, 10);
+                };
+            };
+        }])
+    });
+
+    function MyController($scope, notify) {
+        //服务依赖服务，隐式依赖，名称一致即可
+        $scope.msgs = [];
+        $scope.saveMsg = function() {
+            this.msgs.push(this.msg);
+            notify(this.msg);
+            this.msg = "";
+        };
+    };
+    </script>
+
+</body>
+
+</html>

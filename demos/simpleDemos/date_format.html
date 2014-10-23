@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="">
+	<head>
+		<meta charset="utf-8" />
+        <title>使用过滤器的方式显示系统当前时间</title>
+	</head>
+	<body>
+		<div ng-controller="TestCtrl">
+			<span ng-bind="a | date: 'yyyy年MM月dd日 HH时mm分ss秒 sss'"></span>
+		</div>
+
+		<script src="js/angular.min.js"></script>
+		<script>
+			var TestCtrl = function($scope){
+				$scope.a = ((new Date().valueOf()));
+			}
+		</script>
+
+	</body>
+</html>

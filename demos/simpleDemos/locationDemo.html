@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html ng-app>
+	<head>
+		<base href="" />
+	</head>
+	<body>
+		
+		<div ng-non-bindable class="html5-hashbang-example">
+			<div id="html5-mode" ng-controller="Html5Contrller">
+				<h4>Brower with History API</h4>
+				<div ng-address-bar browser="html5"></div><br><br>
+				$location.protocol() = {{$location.protocol()}} <br>
+				$location.host() = {{$location.host()}} <br>
+				$location.path() = {{$location.path()}} <br>
+				$location.port() = {{$location.port()}} <br>
+				$location.search() = {{$location.search()}} <br>
+				$location.hash() = {{$location.hash()}} <br>
+				<a href="http://www.host.com/base/first?a=b">/base/first?a=b</a> |
+		        <a href="http://www.host.com/base/sec/ond?flag#hash">sec/ond?flag#hash</a> |
+        		<a href="/other-base/another?search">external</a>
+			</div>
+			<div id="hashbang-mode" ng-controller="HashbangContrller">
+				<h4>Brower without History API</h4>
+				<div ng-address-bar browser="hashbang"></div><br><br>
+				$location.protocol() = {{$location.protocol()}} <br>
+				$location.host() = {{$location.host()}} <br>
+				$location.path() = {{$location.path()}} <br>
+				$location.port() = {{$location.port()}} <br>
+				$location.search() = {{$location.search()}} <br>
+				$location.hash() = {{$location.hash()}} <br>
+				<a href="http://www.host.com/base/first?a=b">/base/first?a=b</a> |
+		        <a href="http://www.host.com/base/sec/ond?flag#hash">sec/ond?flag#hash</a> |
+        		<a href="/other-base/another?search">external</a>
+			</div>
+		</div>
+
+		<script src="js/angular.min.js"></script>
+		<script>
+			function FackBrowser(initUrl, baseHref){
+				this.onUrlChange = function(fn){
+					this.urlChange = fn;
+				};
+				this.url = function() {
+					return initUrl;
+				};
+				this.defer = function(fn, delay){
+					setTimeout(function(){fn();}, delaty || 0);
+				};
+				this.baseHref = function(){
+					return baseHref;
+				};
+				this.notifyWhenOutstandingRequests = angular.noop;
+			};
+
+			var browsers = {
+				html5: new FakeBrowser('http://www.host.com/base/path?a=b#h', '/base/index.html'),
+        		hashbang: new FakeBrowser('http://www.host.com/base/index.html#!/path?a=b#h', '/base/index.html')
+			};
+
+			function Html5Contrller($scope, $location){
+				$scope.$location = $location;
+			}
+		</script>
+	</body>
+</html>

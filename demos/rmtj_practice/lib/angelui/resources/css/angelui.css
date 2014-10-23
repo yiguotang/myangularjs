@@ -1,0 +1,46 @@
+.tabContent {
+    float: left;
+    position: absolute;
+    top: 42px;
+    overflow: auto;
+    bottom: 24px;
+    left: 5px;
+    right: 0;
+}
+
+.tabContent>*{
+    width: 800px;
+    margin-left: 50%;
+    left:-400px;
+    position: absolute;
+}
+
+.formContent .workflowToolBar{
+    position: absolute;
+    right: 0;
+}
+
+input.form-control[readonly]{
+    cursor: default;
+    background: #fff;
+}
+
+.pager input{
+    border: 0;
+}
+
+.angel-datepicker .btn-clear{
+    background: url(../images/inputDataX.png) no-repeat center;
+}
+.angel-datepicker .btn-date{
+    background: url(../images/inputData.png) no-repeat center;
+}
+
+.angel-datepicker input[readonly]{
+    background: #fff;
+    cursor: default;
+}
+
+.ui-match{
+    font-weight: bold;
+}

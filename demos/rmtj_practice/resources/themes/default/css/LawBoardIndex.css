@@ -1,0 +1,289 @@
+@charset "utf-8";
+.lawboard{
+    margin: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lawboard h2{
+    margin: 0;
+}
+/* CSS Document */
+/*  左边列表 */
+.ToDoList{
+position:absolute;
+top:0;
+left:6px;
+right:250px;
+bottom:0;
+background:#fff;
+border-right:1px solid #a4a3a1;	
+	}
+
+/*  标题 */
+.LOtoDoList .title01{
+	background:url(../images/LOtoDoList.png) no-repeat 10px center;
+	}
+.LawtoDoList .title01{
+	background:url(../images/LawtoDoList.png) no-repeat 10px center;
+	}
+.LOHead h2{
+	float:left;
+	width:auto;
+	line-height:49px;
+	font-size:200%;
+	font-family: Microsoft YaHei;
+	text-indent:45px;
+	color:#2A517C;
+	}
+.LOHead  ul{
+	float:left;
+	padding:12px 0 0 10px;
+	}
+.LOHead ul li{
+	float:left;
+	margin:0 0 0 4px;
+	}
+.LOHead  ul li span,a{
+	font-size:116%;
+	font-family: Microsoft YaHei;
+	
+	}
+.LOHead  ul li a:hover{
+	text-decoration:none;
+	}
+
+
+.LOHead  .TDL01{
+	background:#C1272D;
+	border:1px solid #931F28;
+	-moz-border-radius:4px;/*仅Firefox支持，实现圆角效果*/
+	-webkit-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+	-khtml-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+	border-radius:4px;/*仅Opera，Safari,Chrome支持，实现圆角效果*/
+	padding:0 4px 0 4px;
+	
+	}
+.LOHead  .TDL02{
+	background:#69AA02;
+	border:1px solid #007218;
+	-moz-border-radius:4px;/*仅Firefox支持，实现圆角效果*/
+	-webkit-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+	-khtml-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+	border-radius:4px;/*仅Opera，Safari,Chrome支持，实现圆角效果*/
+	padding:0 4px 0 4px;
+	
+	}
+.LOHead .TDL03{
+	background:#4D4D4D;
+	border:1px solid #1A1A1A;
+	-moz-border-radius:4px;/*仅Firefox支持，实现圆角效果*/
+	-webkit-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+	-khtml-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+	border-radius:4px;/*仅Opera，Safari,Chrome支持，实现圆角效果*/
+	padding:0 4px 0 4px;
+	
+	}
+.LOHead .TDL01 a{
+	color:#fff;
+	}
+.LOHead .TDL02 a{
+	color:#fff;
+	}
+.LOHead  .TDL03 a{
+	color:#fff;
+	}
+/*end  标题 */	
+/*  查看更多 */
+.endList01{
+	
+	position:absolute;
+	top:20px;
+	right:20px;
+	}
+.endList01:hover{
+	text-decoration:underline;
+	}
+.endList02{
+	position:absolute;
+	top:380px;
+	right:20px;
+	}
+.endList02:hover{
+	text-decoration:underline;
+	}
+/* end 查看更多 */	
+/*  表格 */
+.TDtable{
+	margin:10px 10px;
+	
+	
+	}
+.TDtable table{
+	width:100%;
+	
+	}
+.TDtable table tbody tr td{
+	border-top:1px solid #ededed;
+	
+	}
+.TDTLine{
+	border-right:1px solid #ededed;
+	}
+
+/* end 表格 */
+.TDList{
+	float:left;
+	width:100%;
+    position: relative;
+	}
+.TDList:hover{
+	float:left;
+	background:#fff;
+	-moz-box-shadow:inset 0 0 5px #C1C1C1;
+	-webkit-box-shadow:inset 0 0 5px #C1C1C1;
+	box-shadow:inset 0 0 5px #C1C1C1;
+	background:#e4e4e4 url(../images/bg01.png) repeat-x;	
+	}
+.TDList ul {
+	padding: 10px 0;
+	float: left;
+	width: 100%;
+	position:relative;
+	z-index:2;
+	}
+.TDList li{
+	float:left;
+	width:22%;
+	}
+.TDList li.title{
+	width:32%;
+	text-align:right;
+	padding-right:2%;
+	font-size:116%;
+	font-family: Microsoft YaHei;
+	}
+
+.TDList li.liTTred a{
+	font-size: 200%;
+	font-family: Verdana;
+	color:#931F28;
+	}
+.TDList li.liTTgreen a{
+	font-size: 200%;
+	font-family: Verdana;
+	color:#007218;
+	}
+.TDList li.liTTblack a{
+	font-size: 200%;
+	font-family: Verdana;
+	color:#939393;
+	}
+.TDList li a:hover { text-decoration:none;}	
+.TDList li span { float:left; font-size:50%;}	
+
+.TDLRed{
+	position:absolute;
+	z-index:1;
+	width:75px;
+	height:38px;
+	background:#C1272D;
+	border-top:5px solid #931F28;
+	border-left:1px solid #931F28;
+	border-right:1px solid #931F28;
+	border-bottom:1px solid #931F28;
+	}
+.TDLGreen{
+	position:absolute;
+	z-index:1;
+	width:75px;
+	height:38px;
+	background:#69AA02;
+	border-top:5px solid #007218;
+	border-left:1px solid #007218;
+	border-right:1px solid #007218;
+	border-bottom:1px solid #007218;
+	}
+.TDLBlack{
+	position:absolute;
+	z-index:1;
+	width:75px;
+	height:38px;
+	background:#4D4D4D;
+	border-top:5px solid #1A1A1A;
+	border-left:1px solid #1A1A1A;
+	border-right:1px solid #1A1A1A;
+	border-bottom:1px solid #1A1A1A;
+	}
+.TDtable .TDhover{
+	color:#fff;
+	}
+.TDTUnderline{
+	border-bottom:1px solid #ededed;
+	}
+.liTTredhover a, .liTTgreenhover a, .liTTblackhover a{
+	color:#fff;
+	font-size: 200%;
+	font-family: Verdana;
+	}
+.liTTredhover span, .liTTgreenhover span, .liTTblackhover span{
+	color:#fff;
+	}
+/*  统计 */
+
+.Statistics{
+	position:absolute;
+	right:0;
+	width:230px;	
+	}
+.LawStatistics h2{
+	background:url(../images/LawStatistics.png) no-repeat 0 center;
+	}
+.LOStatistics{
+	margin:10px 0 0 0;
+	}
+.LOStatistics h2{
+	background:url(../images/LOStatistics.png) no-repeat 0 center;
+	}
+.Statistics h2{
+	width:auto;
+	line-height:49px;
+	font-size:200%;
+	font-family: Microsoft YaHei;
+	text-indent:45px;
+	color:#2A517C;
+	}
+.Statistics .LSChart{
+	width:210px;
+	
+		
+	}
+.Statistics ul{
+	clear:both;
+	}
+.Statistics ul li p{
+	font-size:116%;
+	font-family: Microsoft YaHei;
+	}
+.Statistics ul li font{
+	display:inline-block;
+	width:10px;
+	height:10px;
+	}
+.Statistics ul li span{
+	display:inline-block;
+	text-indent:10px;
+	}
+/* 变换色彩 */
+.Statistics .LSCMark01{
+	background:#2F7ED8;
+	}
+.Statistics .LSCMark02{
+	background:#8BBC21;
+	}
+.Statistics .LSCMark03{
+	background:#0D233A;
+	}
+.Statistics .LSCMark04{
+	background:#1AADCE;
+	}

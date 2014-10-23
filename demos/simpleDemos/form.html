@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" ng-app="CustomValidation">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CustomValidation</title>
+    <style type="text/css">
+    .ng-cloak {
+        display: none;
+    }
+    .css-form input.ng-invalid.ng-dirty {
+        background-color: #fa787e;
+    }
+    .css-form input.ng-valid.ng-dirty {
+        background-color: #78fa89;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="ng-cloak">
+        <form novalidate class="css-form" name="formName">
+            <div>大小(整数 0 - 10):
+                <input integer type="number" ng-model="size" name="size" min="0" max="10" />{{size}}
+                <br/>
+                <span ng-show="formName.size.$error.integer">这不是一个有效的整数</span>
+                <span ng-show="formName.size.$error.min || formName.size.$error.max">数值必须在0到10之间</span>
+            </div>
+            <div>长度（浮点数）：
+                <input type="text" ng-model="length" name="length" smart-float/>{{length}}
+                <br/>
+                <span ng-show="formName.length.0error.float">这不是一个有效的浮点数</span>
+            </div>
+        </form>
+    </div>
+    <script src="js/angular.min.js"></script>
+    <script type="text/javascript">
+    var app = angular.module("CustomValidation", []);
+    var INTEGER_REGEXP = /^\-?\d*$/;
+    app.directive("integer", function() {
+        return {
+            require: "ngModel", //NgModelController
+            link: function(scope, ele, attrs, ctrl) {
+                ctrl.$parsers.unshift(function(viewValue) { //$parsers，View到Model的更新
+                    if (INTEGER_REGEXP.test(viewValue)) {
+                        ctrl.$setValidity("integer", true);
+                        return viewValue;
+                    } else {
+                        ctrl.$setValidity("integer", false);
+                        return undefined;
+                    }
+                });
+            }
+        };
+    });
+    var FLOAT_REGEXP = /^\-?\d+(?:[.,]\d+)?$/;
+    app.directive("smartFloat", function() {
+        return {
+            require: "ngModel",
+            link: function(scope, ele, attrs, ctrl) {
+                ctrl.$parsers.unshift(function(viewValue) {
+                    if (FLOAT_REGEXP.test(viewValue)) {
+                        ctrl.$setValidity("float", true);
+                        return parseFloat(viewValue.replace(",", "."));
+                    } else {
+                        ctrl.$setValidity("float", false);
+                        return undefined;
+                    }
+                });
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

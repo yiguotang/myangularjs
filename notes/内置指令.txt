@@ -1,0 +1,283 @@
+布尔属性
+	1. ng-disabled，可以绑定在下列表单输入字段上：
+		<input>（ text 、 checkbox 、 radio 、 number 、 url ,  email 、 submit ）
+	  <textarea> 
+	  <select>
+	  <button>
+
+		可以 $timeout 设置disabled在一定时间内为false，
+		<textarea ng-disabled="isDisabled">Wait5seconds</textarea>
+
+		angular.module('myApp', [])
+			.run(function($rootScope, $timeout) {
+				$rootScope.isDisabled = true;
+				$timeout(function() {
+					$rootScope.isDisabled = false;
+				}, 5000);
+		});
+
+	2. ng-readonly
+
+	3. ng-checked，通过 ng-checked 将某个表达式同是否出现 checked 属性进行绑定
+
+	4. ng-selected，可以对是否出现 option 标签的 selected 属性进行绑定
+
+类布尔属性
+	1. ng-href
+		href，当点击一个插值生成的动态链接时，如果尚未生效，点击会进入错误页面
+		使用ng-href可以进行设置，等到插值生效后再执行点击行为
+		<!-- 当 href 包含一个 {{expression}}时总是使用 ng-href -->
+		<a ng-href="{{ myHref }}">I am feeling lucky, when I load</a>
+		<!-- 用户单击之前，href不会加载 -->
+		<a href="{{ myHref }}">I am feeling 404</a>		
+
+		angular.module('myApp', [])
+			.run(function($rootScope, $timeout) {
+				$timeout(function() {
+					$rootScope.myHref = 'http://google.com';
+				}, 2000);
+			});
+
+	2. ng-src
+		AngularJS会告诉浏览器在 ng-src 对应的表达式生效之前不要加载图像
+		<h1>WrongWay</h1>
+		<img src="{{imgSrc}}"/>
+		<h1>Rightway</h1>
+		<img ng-src="{{imgSrc}}"/>
+
+		angular.module('myApp', [])
+			.run(function($rootScope, $timeout) {
+				$timeout(function() {
+					$rootScope.imgSrc = 'https://www.google.com/images/srpr/logo11w.png';
+				}, 2000);
+			});
+
+在指令中使用子作用域
+	1. ng-app
+		任何具有 ng-app 属性的DOM元素将被标记为 $rootScope 的起始点
+		$rootScope 是作用域链的起始点，任何嵌套在 ng-app 内的指令都会继承它
+		在JavaScript代码中通过 run 方法来访问 $rootScope
+		<html ng-app="myApp">
+			<body>
+				{{ someProperty }}
+				<button ng-click="someAction()"></button>
+			</body>
+		</html>
+
+		angular.module('myApp', [])
+			.run(function($rootScope) {
+				$rootScope.someProperty = 'hello computer';
+				$rootScope.someAction = function() {
+					$rootScope.someProperty = 'hello human';
+			};
+		});
+
+		实际生产中不建议这样做。可以在整个文档中只使用一次 ng-app
+
+	2. ng-controller
+		内置指令 ng-controller 的作用是为嵌套在其中的指令创建一个子作用域，避免将所有操作和模型都定义在 $rootScope 上。
+		用这个指令可以在一个DOM元素上放置控制器
+		ng-controller 接受一个参数 expression ，这个参数是必需的。
+		expression 参数是一个AngularJS表达式。
+		子 $scope 只是一个JavaScript对象，其中含有从父级 $scope 中通过原型继承得到的方法和属性，包括应用的 $rootScope 。
+		嵌套在 ng-controller 中的指令有访问新子 $scope 的权限，但是要牢记每个指令都应该遵守的和作用域相关的规则。
+
+		<div ng-controller="SomeController">
+			{{ someModel.someProperty }}
+			<button ng-click="someAction()">Communicate</button>
+		</div>
+
+		angular.module('myApp', [])
+			.controller('SomeController', function($scope) {
+				//创建模型
+				$scope.someModel = {
+					// 添加属性
+					someProperty: 'hello computer'
+				}
+				// 设置$scope自身的操作
+				$scope.someAction = function() {
+					$scope.someModel.someProperty = 'hello human';
+			};
+		});
+
+
+		<div ng-controller="SomeController">
+			{{ someBareValue }}
+			<button ng-click="someAction()">Communicate to child</button>
+			<div ng-controller="ChildController">
+				{{ someBareValue }}
+				<button ng-click="childAction()">Communicate to parent</button>
+			</div>
+		</div>
+
+		angular.module('myApp', [])
+			.controller('SomeController', function($scope) {
+				// 反模式，裸值
+				$scope.someBareValue = 'hello computer';
+				// 设置 $scope 本身的操作，这样没问题
+				$scope.someAction = function() {
+					// 在SomeController和ChildController中设置{{ someBareValue }}
+					$scope.someBareValue = 'hello human, from parent';
+				};
+			})
+			.controller('ChildController', function($scope) {
+			$scope.childAction = function() {
+				// 在ChildController中设置{{ someBareValue }}
+				$scope.someBareValue = 'hello human, from child';
+			};
+			});
+
+	3. ng-include
+		 可以加载、编译并包含外部HTML片段到当前的应用中
+
+	4. ng-switch
+		这个指令和 ng-switch-when 及 on="propertyName" 一起使用，可以在 propertyName 发生变
+		化时渲染不同指令到视图中。
+
+		<input type="text" ng-model="person.name"/>
+		<div ng-switch on="person.name">
+			<p ng-switch-default>And the winner is</p>
+			<h1 ng-switch-when="Ari">{{ person.name }}</h1>
+		</div>
+
+		在 switch 被调用之前我们用 ng-switch-default 来输出默认值
+
+	5. ng-view
+		用来设置将被路由管理和放置在HTML中的视图的位置
+
+	6. ng-if
+		可以完全根据表达式的值在DOM中生成或移除一个元素
+		
+		如果赋值给 ng-if的表达式的值是 false ，那对应的元素将会从DOM中移除，
+		否则对应元素的一个克隆将被重新插入DOM中。
+
+		ng-if 同 no-show 和 ng-hide 指令最本质的区别是，它不是通过CSS显示或隐藏DOM节点，而
+		是真正生成或移除节点。
+
+		当一个元素被 ng-if 从DOM中移除， 同它关联的作用域也会被销毁。 而且当它重新加入DOM
+		中时，会通过原型继承从它的父作用域生成一个新的作用域。
+
+		ngIf重新创建元素时用的是它们编译后的状态。
+		如果 ng-if内部的代码加载之后被jQuery修改过（例如用 .addClass ） ，那么当 ng-if 的表达式值为 false 时，
+		这个DOM元素会被移除，表达式再次成为 true 时这个元素及其内部的子元素会被重新插入
+		DOM，此时这些元素的状态会是它们的原始状态，而不是它们上次被移除时的状态。也就是说
+		无论用jQuery的 .addClass 添加了什么类都不会存在了
+
+		<div ng-if="2+2===5">
+			Won not see this DOM node, not even in the source code
+		</div>
+		<div ng-if="2+2===4">
+			Hi, I do exist
+		</div>
+
+	7. ng-repeat
+		用来遍历一个集合或为集合中的每个元素生成一个模板实例
+		集合中的每个元素都会被赋予自己的模板和作用域。
+		同时每个模板实例的作用域中都会暴露一些特殊的属性。
+			$index ：遍历的进度（0... length-1 ） 。
+			$first ：当元素是遍历的第一个时值为 true 。
+			$middle ：当元素处于第一个和最后元素之间时值为 true 。
+			$last ：当元素是遍历的最后一个时值为 true 。
+			$even ：当 $index 值是偶数时值为 true 。
+			$odd ：当 $index 值是奇数时值为 true 。
+		用 !$even 和 !$odd 来将 $even 和 $odd 的布尔值反转
+
+	8. ng-init
+		用来在指令被调用时设置内部作用域的初始状态
+
+	9. {{}}
+		会在内部 $scope 和视图之间创建绑定，基于这个绑定，只要 $scope 发生变化，视图就会随之自动更新
+		它是 ng-bind 的简略形式，用这种形式不需要创建新的元素，因此它常被用在行内文本中
+		用 ng-bind可以避免{{}}在屏幕可视区域加载未渲染出现的元素闪烁现象
+
+	10. ng-bind
+
+	11. ng-cloak
+		除使用 ng-bind 来避免未渲染元素闪烁，还可以在含有 {{ }} 的元素上使用 ng-cloak 指令：
+		<body ng-init="greeting='HelloWorld'">
+			<p ng-cloak>{{ greeting }}</p>
+		</body>
+		ng-cloak 指令会将内部元素隐藏，直到路由调用对应的页面时才显示出来
+
+	12. ng-bind-template
+		同 ng-bind 指令类似， ng-bind-template 用来在视图中绑定多个表达式。
+		<div ng-bind-template="{{message}}{{name}}"></div>
+
+	13. ng-model
+		用来将 input 、 select 、 text area 或自定义表单控件同包含它们的作用域中的属性进行绑定
+		我们应该始终用 ngModel 来绑定 $scope 上一个数据模型内的属性，而不是 $scope 上的属性，
+		这可以避免在作用域或后代作用域中发生属性覆盖
+		<input type="text" ng-model="modelName.someProperty" />
+
+	14. ng-show/ng-hide
+		ng-show 和 ng-hide 根据所给表达式的值来显示或隐藏HTML元素。当赋值给 ng-show 指令的
+		值为 false 时元素会被隐藏。类似地，当赋值给 ng-hide 指令的值为 true 时元素也会被隐藏。
+
+	15. ng-change
+		这个指令会在表单输入发生变化时计算给定表达式的值。因为要处理表单输入，这个指令要
+		和 ngModel 联合起来使用。
+
+	16. ng-form
+		 用来在一个表单内部嵌套另一个表单
+		 普通的HTML  <form> 标签不允许嵌套，但ng-form 可以。
+
+	17. ng-click
+		 用来指定一个元素被点击时调用的方法或表达式
+
+	18. ng-select
+		用来将数据同HTML的 <select> 元素进行绑定
+		这个指令可以和 ng-model 以及 ng-options 指令一同使用，构建精细且表现优良的动态表单
+		ng-options 的值可以接受一个数组或对象，并对它们进行循环，将内部的内容提供给select 标签内部的选项
+		它可以是下面两种形式:
+			 数组作为数据源：
+			  用数组中的值做标签；
+			  用数组中的值作为选中的标签；
+			  用数组中的值做标签组；
+			  用数组中的值作为选中的标签组。
+  		对象作为数据源：
+			  用对象的键值（key-value）做标签；
+			  用对象的键值作为选中的标签；
+			  用对象的键值作为标签组；
+			  用对象的键值作为选中的标签组
+
+		<div ng-controller="CityController">
+			<select ng-model="city"	ng-options="city.name for city in cities">
+				<option value="">Choose City</option>
+			</select>
+			Best City: {{ city.name }}
+		</div>
+
+		angular.module('myApp',[])
+			.controller('CityController',function($scope) {
+				$scope.cities = [
+					{name: 'Seattle'},
+					{name: 'San Francisco'},
+					{name: 'Chicago'},
+					{name: 'New York'},
+					{name: 'Boston'}
+				];
+		});
+
+	19. ng-submit
+		用来将表达式同 onsubmit 事件进行绑定
+		这个指令同时会阻止默认行为（发送请求并重新加载页面） ，除非表单不含有 action 属性。
+
+	20. ng-class
+		动态设置元素的类，方法是绑定一个代表所有需要添加的类的表达式
+		重复的类不会添加。当表达式发生变化，先前添加的类会被移除，新类会被添加
+
+	21. ng-attr-(suffix)
+		当AngularJS编译DOM时会查找花括号 {{ some expression }} 内的表达式。这些表达式会
+		被自动注册到 $watch 服务中并更新到 $digest 循环中，成为它的一部分：
+			<-- updated when`someExpression` on the$scope is updated -->
+			<h1>Hello{{someExpression}}</h1>
+		有时浏览器会对属性会进行很苛刻的限制。SVG就是一个例子：
+			<svg>
+				<circle cx="{{ cx }}"></circle>
+			</svg>
+		运行上面的代码会抛出一个错误，指出我们有一个非法属性。可以用 ng-attr-cx 来解决这
+		个问题。注意，cx 位于这个名称的尾部。在这个属性中，通过用 {{ }} 来写表达式，达到前面提
+		到的目的。
+			<svg>
+				<circle ng-attr-cx="{{ cx }}"><circle>
+			</svg>

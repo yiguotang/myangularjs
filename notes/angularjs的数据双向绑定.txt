@@ -1,0 +1,15 @@
+数据 --> 模板：
+	主要使用模板标记直接完成的：
+		使用 {{ }} 这个标记，就可以直接引用，并绑定一个作用域内的变量。
+
+
+模板 --> 数据：
+	主要使用的是ng-model来完成的：
+	<input type="text" id="test" ng-controller="TestCtrl" ng-model="a" />
+	<script type="text/javascript" charset="utf-8">
+	var TestCtrl = function($scope){
+		$scope.a = '123';
+	}
+	实际上， ng-model 是把两个方向的绑定都做了。它不光显示出变量的值，也把显示上的数值变化
+	反映给了变量。这个在实现上就简单多了，只是绑定 change 事件，然后做一些赋值操作即可。不
+	过 ng 里，还要区分对待不同的控件。

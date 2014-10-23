@@ -1,0 +1,110 @@
+.ng-invalid:focus {
+    box-shadow: 0 0 5px #f00;
+    -webkit-box-shadow: 0 0 5px #f00;
+    -moz-box-shadow: 0 0 5px #f00;
+    border: 1px solid #f00;
+}
+
+form .error {
+    color: #f00;
+}
+
+input[type='text'].ng-valid.ng-dirty:focus, textarea.ng-valid.ng-dirty:focus {
+    background: #78fa89;
+}
+
+#myTemplate {
+    float: left;
+    width: 100%;
+}
+
+.fullbox {
+    width: 100%;
+}
+
+.fullbox .title {
+    text-align: center;
+    line-height: 26px;
+    font-size: 20px;
+    width: 100%;
+    float: left;
+}
+
+.volunteers {
+    width: 100%;
+}
+
+.volunteer-edit .title {
+    text-align: center;
+    line-height: 26px;
+    font-size: 20px;
+    width: 100%;
+    float: left;
+}
+
+.volunteer-edit form {
+    width: 100%;
+    float: left;
+}
+
+.volunteer-edit form table {
+    margin: 20px 0 0 20px;
+    float: left;
+    clear: both;
+}
+
+.volunteer-edit form button {
+    float: left;
+    clear: both;
+    margin-left: 20px;
+}
+
+.volunteer-edit textarea {
+    width: 210px;
+    height: 40px;
+}
+
+input.page {
+    height: 12px;
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+input.page:focus {
+    border: 0;
+}
+
+.inv-list .search-box {
+    background: #f0f0f0;
+}
+
+.inv-data-table > tbody > tr.needdeliver {
+    color: #ff5555;
+    font-weight: bold;
+}
+
+.table-selectable > tbody > tr.selected > td {
+    background: #c0c0c0;
+}
+.modal-limited{
+    max-height: 400px;
+    overflow: auto;
+}
+
+.border-box{
+    margin:0;
+    border:1px solid #ddd;
+    border-radius: 4px;
+}
+
+input.angel-datepicker[readonly]{
+    cursor: default;
+    background: #fff;
+}
+
+.margin-top{
+    margin-top: 10px;
+}

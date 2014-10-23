@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>Managing Service Dependencies</title>
+</head>
+<body>
+	
+	<script src="js/angular.min.js"></script>
+	<script>
+		//batchLog sevice允许消息在内存中形成队列，50秒flush一次
+		function batchLogModule($provide){
+			$provide.factory('batchLog', ['$timeout', '$log', function($timeout, $log){
+				var messageQueue = [];
+				function log(){
+					if (messageQueue.length) {
+						$log('batchLog messages:', messageQueue);
+						messageQueue = [];
+					};
+					$timeout(log, 50000);
+				};
+				log();
+				return function(message){
+					messageQueue.push(message)
+				};
+			}])；
+
+			//routeTemplateMonitor监控每一个route的变化，都会通过batchLog service记录下来
+			$provide.factory('routeTemplateMonitor', ['$route', 'batchLog', '$rootScope', function($route, batchLog, $rootScope){
+				$rootScope.$on('$routeChangeSuccess', function(){
+					batchLog($route.current ? $route.current.$template : null);
+				});
+			}]); 
+		};
+
+		//获得Angular主Service，运行应用
+		angular.$injector([batchLogModule]).get('routeTemplateMonitor');		
+	</script>
+</body>
+</html>

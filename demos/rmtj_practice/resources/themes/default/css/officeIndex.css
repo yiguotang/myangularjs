@@ -1,0 +1,520 @@
+@charset "utf-8";
+/* CSS Document */
+/* 待办事项 */
+.lawyerIndex{
+    width: 100%;
+    left: 0;
+    margin: 0;
+}
+.toDoList {
+    position: absolute;
+    left: 15px;
+    top: 2px;
+    right: 290px;
+}
+
+.toDoList  ul{
+    float:left;
+    padding:12px 0 0 10px;
+}
+.toDoList ul li{
+    float:left;
+    margin:0 0 0 4px;
+}
+.toDoList  ul li span,a{
+    font-size:116%;
+    font-family: Microsoft YaHei;
+
+}
+.toDoList  ul li a:hover{
+    text-decoration:none;
+}
+.toDoList  .TDL01{
+    background:#C1272D;
+    border:1px solid #931F28;
+    -moz-border-radius:4px;/*仅Firefox支持，实现圆角效果*/
+    -webkit-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+    -khtml-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+    border-radius:4px;/*仅Opera，Safari,Chrome支持，实现圆角效果*/
+    padding:0 4px 0 4px;
+
+}
+.toDoList  .TDL02{
+    background:#69AA02;
+    border:1px solid #007218;
+    -moz-border-radius:4px;/*仅Firefox支持，实现圆角效果*/
+    -webkit-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+    -khtml-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+    border-radius:4px;/*仅Opera，Safari,Chrome支持，实现圆角效果*/
+    padding:0 4px 0 4px;
+
+}
+.toDoList .TDL03{
+    background:#4D4D4D;
+    border:1px solid #1A1A1A;
+    -moz-border-radius:4px;/*仅Firefox支持，实现圆角效果*/
+    -webkit-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+    -khtml-border-radius:4px;/*仅Safari,Chrome支持，实现圆角效果*/
+    border-radius:4px;/*仅Opera，Safari,Chrome支持，实现圆角效果*/
+    padding:0 4px 0 4px;
+
+}
+.toDoList .TDL01 a{
+    color:#fff;
+}
+.toDoList .TDL02 a{
+    color:#fff;
+}
+.toDoList  .TDL03 a{
+    color:#fff;
+}
+
+h2.title {
+    float: left;
+    line-height: 49px;
+    position: relative;
+    font-size: 150%;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
+    text-indent: 45px;
+    color: #2a517c;
+    margin: 0;
+}
+
+.buttonMod h2.title{
+    width: 100%;
+}
+
+h2.title.officeList {
+    background: url(../images/secTTicon01.png) no-repeat 10px center;
+}
+
+h2.title.officeList .titleTips {
+    Font-size: 70%;
+    color: #333;
+}
+
+h2.title a.more {
+    font-weight: normal;
+    font-size: 70%;
+    line-height: 49px;
+    color: #fff;
+    position: absolute;
+    right: -780px;
+    top: 0px;
+    color: #333;
+}
+
+/*-------*/
+.tableList02 {
+}
+
+.tableList02 .searchBox {
+    border: 1px solid #bfbfbf;
+    border-bottom: 0px;
+    padding: 10px 0;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tableList02 .searchBox dl {
+    display: table;
+}
+
+.tableList02 .searchBox dt,
+.tableList02 .searchBox dd {
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    display: table-cell;
+    padding-right: 12px;
+    text-align: left;
+}
+
+.tableList02 .searchBox dt {
+    font-family: Microsoft YaHei;
+    font-size: 116%;
+    font-weight: bold;
+    padding: 0 12px;
+}
+
+.tableList02 .searchBox dd .inputTxt,
+.tableList02 .searchBox dd .selectBox {
+    display: inherit;
+}
+
+.tableList02 .searchBox dd .searchBt {
+    display: inherit;
+    width: auto;
+    height: 28px;
+    line-height: 28px;
+    background: #fff5ba url(../images/searchIcon.png) no-repeat 8px center;
+    text-indent: 32px;
+    border: 1px solid #cfa02e;
+    padding: 0 8px;
+    box-shadow: 0px 5px 5px #ccc;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
+}
+
+.tableList02 .searchBox dd .searchBt:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*--------*/
+.tableList02 table {
+    float: left;
+    border: 1px solid #bfbfbf;
+    border-top: 1px solid #a4a3a1;
+    width: 100%;
+}
+
+.tableList02 td {
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
+    background: #fff;
+    border-bottom: 1px solid #ededed;
+}
+
+.tableList02 td select {
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+}
+
+.tableList02 td.checkAll .CheckBox {
+    float: left;
+    margin: 13px 8px 0px 12px;
+}
+
+.tableList02 thead td {
+    background: #f9f9f9;
+    border-bottom: 1px solid #bfbfbf;
+    border-right: 1px solid #bfbfbf;
+    font-size: 116%;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
+}
+
+.tableList02 thead td.lastLine {
+    border-right: 0px;
+}
+
+.tableList02 tbody td {
+}
+
+.tableList02 tbody td.Number {
+    width: 100px;
+    text-align: center;
+    font-size: 200%;
+    font-family: Verdana;
+    font-style: italic;
+    color: #939393;
+}
+
+.tableList02 tbody tr:hover td {
+    background: #fbfbfb;
+    border-bottom: 1px solid #bfbfbf;
+}
+
+/*-------右侧的名片位置------*/
+.cardBox {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    float: left;
+    width: 270px;
+    min-height: 410px;
+    height: auto;
+    background: url(../images/cardBg.png) no-repeat left top;
+    border: 1px solid #bfbfbf;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 5px #ccc;
+}
+
+/*----*/
+.cardBox .companyLogo {
+    height: 120px;
+    width: 270px;
+    display: table-cell; /*图片容器以表格的单元格形式显示*/
+    text-align: center; /* 实现水平居中 */
+    vertical-align: middle;
+}
+
+.cardBox .companyLogo img {
+    vertical-align: middle;
+}
+
+.cardBox .nameCN {
+    float: left;
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    font-size: 200%;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
+    color: #555;
+}
+
+.cardBox .nameEN {
+    float: left;
+    width: 100%;
+    line-height: 18px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Verdana;
+    color: #888;
+}
+
+.CBH {
+    height: 290px;
+    float: left;
+    width: 100%;
+}
+
+/*---资本信息--*/
+.cardBox td {
+    text-align: left;
+    line-height: 24px;
+    font-family: Microsoft YaHei;
+    font-size: 116%;
+    padding: 0 1em;
+}
+
+.cardBox td.tt {
+    width: 35%;
+    text-align: right;
+    border-right: 1px solid #c7c7c7;
+}
+
+/*---功能按钮模块---*/
+.buttonMod {
+    position: absolute;
+    left: 15px;
+    top: 422px;
+    right: 10px;
+}
+
+h2.title.buttonIcon {
+    background: url(../images/secTTicon02.png) no-repeat 10px center;
+    border-bottom: 2px solid #2a517c;
+    line-height: 47px;
+}
+
+h2.title a.addBt {
+    font-weight: normal;
+    font-size: 70%;
+    line-height: 49px;
+    color: #fff;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 0 5px;
+    color: #333;
+    background: url(../images/secTTadd.png) no-repeat 5px center;
+    text-indent: 20px;
+}
+
+h2.title a.addBt:hover {
+    color: #fff;
+    background: #2a517c url(../images/secTTadd_hover.png) no-repeat 5px center;
+}
+
+.buttonMod ul {
+    float: left;
+    margin-top: 10px;
+}
+
+.buttonMod li {
+    float: left;
+    width: 120px;
+    min-height: 120px;
+    height: auto;
+    text-align: center;
+    line-height: 18px;
+}
+
+.buttonMod li a.BMicon01,
+.buttonMod li a.BMicon02,
+.buttonMod li a.BMicon03,
+.buttonMod li a.BMicon04,
+.buttonMod li a.BMicon05,
+.buttonMod li a.BMicon06,
+.buttonMod li a.BMicon07,
+.buttonMod li a.BMicon08,
+.buttonMod li a.BMicon09,
+.buttonMod li a.BMicon10,
+.buttonMod li a.BMicon11,
+.buttonMod li a.BMicon12 {
+    float: left;
+    width: 71px;
+    height: 72px;
+    margin: 0 24px;
+    text-indent: -9999px;
+}
+
+.buttonMod li a.BMicon01 {
+    background: url(../images/lawerBt01.png) no-repeat;
+}
+
+.buttonMod li a.BMicon02 {
+    background: url(../images/lawerBt02.png) no-repeat;
+}
+
+.buttonMod li a.BMicon03 {
+    background: url(../images/lawerBt03.png) no-repeat;
+}
+
+.buttonMod li a.BMicon04 {
+    background: url(../images/lawerBt04.png) no-repeat;
+}
+
+.buttonMod li a.BMicon05 {
+    background: url(../images/lawerBt05.png) no-repeat;
+}
+
+.buttonMod li a.BMicon06 {
+    background: url(../images/lawerBt06.png) no-repeat;
+}
+
+.buttonMod li a.BMicon07 {
+    background: url(../images/lawerBt07.png) no-repeat;
+}
+
+.buttonMod li a.BMicon08 {
+    background: url(../images/lawerBt08.png) no-repeat;
+}
+
+.buttonMod li a.BMicon09 {
+    background: url(../images/lawerBt09.png) no-repeat;
+}
+
+.buttonMod li a.BMicon10 {
+    background: url(../images/lawerBt10.png) no-repeat;
+}
+
+.buttonMod li a.BMicon11 {
+    background: url(../images/lawerBt11.png) no-repeat;
+}
+
+.buttonMod li a.BMicon12 {
+    background: url(../images/lawerBt12.png) no-repeat;
+}
+
+.buttonMod li a.BMicon01:hover {
+    background: url(../images/lawerBt01_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon02:hover {
+    background: url(../images/lawerBt02_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon03:hover {
+    background: url(../images/lawerBt03_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon04:hover {
+    background: url(../images/lawerBt04_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon05:hover {
+    background: url(../images/lawerBt05_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon06:hover {
+    background: url(../images/lawerBt06_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon07:hover {
+    background: url(../images/lawerBt07_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon08:hover {
+    background: url(../images/lawerBt08_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon09:hover {
+    background: url(../images/lawerBt09_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon10:hover {
+    background: url(../images/lawerBt10_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon11:hover {
+    background: url(../images/lawerBt11_hover.png) no-repeat;
+}
+
+.buttonMod li a.BMicon12:hover {
+    background: url(../images/lawerBt12_hover.png) no-repeat;
+}
+
+/*-----*/
+.addBtBox {
+    position: absolute;
+    right: 0px;
+    top: 40px;
+    float: left;
+    width: auto;
+    height: auto;
+    display: none;
+}
+
+.addBtBox .ABBlist {
+    background: #2a517c;
+    clear: both;
+    margin: 0px;
+    padding: 10px 0;
+}
+
+.addBtBox .ABBlist li {
+    padding: 10px;
+    float: left;
+    width: 120px;
+    text-align: center;
+    color: #fff;
+    border-right: 1px solid #5f7d9d;
+}
+
+.addBtBox .ABBlist li.noborder {
+    border: 0px;
+}
+
+.addBtBox .ABBlist li a {
+    float: left;
+    width: 120px;
+    padding-top: 50px;
+    text-indent: 0px;
+    color: #fff;
+    text-align: center;
+}
+
+.addBtBox .ABBlist li a.ABBicon01 {
+    background: url(../images/STTaddIcon01.png) no-repeat center top;
+}
+
+.addBtBox .ABBlist li a.ABBicon02 {
+    background: url(../images/STTaddIcon02.png) no-repeat center top;
+}
+
+.addBtBox .ABBlist li a.ABBicon03 {
+    background: url(../images/STTaddIcon03.png) no-repeat center top;
+}
+
+.add_ok,
+.add_no {
+    float: left;
+    width: 100%;
+    height: 32px;
+    padding: 12px 0;
+    background: url(../images/STTadd_ok.png) no-repeat center center;
+    text-indent: -9999px;
+}
+
+.add_no {
+    background: url(../images/STTadd_no.png) no-repeat center center;
+}
+

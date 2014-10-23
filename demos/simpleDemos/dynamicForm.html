@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="application.site">
+<head>
+	<meta charset="UTF-8">
+	<title>dynamicForm</title>
+</head>
+<body>
+
+	<div ng-controller="ListController">
+
+		<button type="button" ng-click="add()">Add a Form</button>
+
+		<form action="" method="post" class="form" ng-repeat="form in forms" novalidate="novalidat">
+			<p> Number <span ng-bind=" $index+1 "></span> Form </p>
+			<label for="username">Account</label>
+			<input type="text" ng-model="username" id="username" ng-required="true">
+			<button type="submit" ng-click="post($index,username)">Submit</button>
+			<button type="text" ng-click="remove($index)">Remove</button>
+		</form>
+
+	</div>
+
+</body>
+<script src="js/angular.min.js"></script>
+<script>
+	var site = angular.module('application.site', []);
+
+	site.controller('ListController', ['$scope', '$http', function($scope, $http){
+		$scope.forms = ["1"];
+
+		$scope.index = 1;
+		$scope.post = function(index, username){
+			console.log('Number [' + (index + 1) + ' ]Form Submit Success!');
+			$scope.forms.splice(index, 1);
+		};
+
+		$scope.add = function(){
+			console.log('add form');
+			$scope.forms.push((++$scope.index).toString());
+		};
+
+		$scope.remove = function(index){
+			console.log('Number [' + (index + 1) + ' ]Form Removed Success!');
+			$scope.forms.splice(index, 1);
+		};
+	}]);
+</script>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html ng-app="Demo">
+	<head>
+		<meta charset="utf-8">
+		<title>Creating A RequireJS Service For AngularJS</title>
+		<style type="text/css">
+			a[ng-click]{
+				cursor:pointer;
+				text-decoration:underline;
+			}
+		</style>
+	</head>
+	
+	<body ng-controller="AppController">
+		<h1>Creating A RequireJS Service For AngularJS</h1>
+		
+		<p>
+			<a ng-click="loadDate()">Load Remote Data with RequireJS</a>
+		</p>
+
+		<ul ng-show="friends.length">
+			<li ng-repeat="friend in friends">
+				{{friend.name}} &mdash; <em> {{friend.catchPhrase}} </em>
+			</li>
+		</ul>
+
+		<script src="js/angular.min.js"></script>
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/require.js"></script>
+		<script>
+			var app = angular.module("Demo", []);
+
+			app.controller('AppController', ['$scope', 'require', function($scope, require){
+				$scope.friends = [];
+
+				$scope.loadDate = function(){
+					require(['friends'], function(newFriends){
+						$scope.friends = newFriends;
+					});
+				};				
+			}]);
+
+			app.factory('require', ['$rootScope', function($rootScope){
+				function requireProxy(dependencies, successCallback, errorCallback){
+					successCallback = (successCallback || angular.noop);
+					errorCallback = (errorCallback || angular.noop);
+
+					require(
+						(dependencies || []),
+						
+						function successCallbackProxy() {
+							var args = arguments;
+
+							$rootScope.$apply(
+								function() {
+									successCallback.apply(this, args);
+								}
+							);
+						},
+
+						function errorCallbackProxy() {
+							var args = arguments;
+
+							$rootScope.$apply(
+								function() {
+									errorCallback.apply(this, args);
+								}
+							);
+						}
+					);
+				};
+
+				return (requireProxy);
+			}]);
+		</script>
+
+	</body>
+</html>

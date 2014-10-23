@@ -1,0 +1,4 @@
+通过模块 API 调用它的 directive()函数来定义标识符，在这个函数中
+directiveFunction 是一个定义标识符特性的工厂函数
+var appModule = angular.module('appModule', [...]);
+appModule.directive ('directiveName', directiveFunction);

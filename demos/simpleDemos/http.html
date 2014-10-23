@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>use $http service to get local data</title>
+</head>
+
+<body>
+
+    <div ng-app="myApp" ng-controller="CustomersController">
+
+        <ul>
+            <li ng-repeat="x in names">
+                <span ng-bind="x.Name + ', ' + x.Country"></span>
+            </li>
+        </ul>
+        <span ng-bind="error"></span>
+
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-resource.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script>
+    var app = angular.module('myApp', ['ngResource', 'ngRoute']);
+
+    app.factory('Notes', ['$resource', function($resource) {
+        return $resource('/notes/:id', null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }]);
+
+    app.controller('CustomersController', ['$scope', '$routeParams', '$http', 'Notes', function($scope, $routeParams, $http, Notes) {
+        $http.get("json.json")
+            .success(function(data) {
+                console.log(data);
+                $scope.names = data;
+            })
+            .error(function(data) {
+                $scope.error = "the url not found";
+            });
+
+        var note = Notes.get({id: $routeParams.id});
+
+        $id = note.id;
+
+        Notes.update({id: $id}, note);
+    }]);
+    </script>
+</body>
+
+</html>

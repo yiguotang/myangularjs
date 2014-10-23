@@ -1,0 +1,104 @@
+使用requirejs进行加载模块，直接引入Angular是不行的，需要通过requirejs的配置让angularjs可以正常运行，配置如下：
+
+1.首先配置requirejs的入口文件main.js
+	require.config({
+		//配置Angular的路径
+		path:{
+			"angular":"path/to/angular",
+			"angular-route":"path/to/angular-route"
+		},
+		
+		//引入依赖的js
+		shim:{
+			"angular":{
+				exports:"angular"
+			},
+			"angular-route":{
+				exports:"angular-route"
+			}
+		}
+	});
+
+2.单独使用Angular的时候，写模块的方式是：
+	var app = angular.module("xxx", ["xxxx"]);
+	app.controller("foo", function($scope){});
+	app.directive(...);
+	
+  当使用requirejs的时候，定义模块的方式是：
+	define(["jquery"], function($){});
+	
+  二者结合的使用方式是：
+	//controller.js
+	define(['app'], function(app){
+		app.controller("mainController", function(#scope){
+			...
+		});
+	});
+	
+	//drective.js
+	define(['app'], function($app){
+		app.directive("xxx", function(scope){
+			...			
+		});
+	});
+	
+	...
+	
+  在编写controller、directive已经其他等等，都需要将方法作用在app上，
+  这个app就是angular.module("xxxApp", []);
+  
+  如何让所有的模块都能引入angular.module("xxxApp", [])呢？
+  需要新建一个app.js
+	  define(["angular", "angular-route"], function(angular){
+			return angular.module("xxxApp", ["ngRoute"]);
+	  });
+  这样，在引入app.js的使用就可以拿到这个angular module了。
+  
+  
+  这样做需要注意：
+	·angular-route这个模块没有继承在angular.js，当使用它时，需要单独引入，类似的以angular-xxx的js都需要单独引入，
+	angular.module("xxxApp", ["ngRoute"]);//需要依赖ngRoute模块，否则无法使用
+
+当这些都配置好之后，最后还要将所有使用的angularjs编写的模块都加载到页面中，即需要一个angular的加载模块，命名一般为angular-bootstrap.js
+	//angular-bootstrap.js
+	require(["angular"], ["angular-route"], ["app"], ["xx.controller"]..., funciton(angular){
+		angular.bootstrap(document, ["your module's name"]);
+	});
+
+angular.bootstrapf方法是angular自带的，使用这个方法手动启动angular application
+
+这样在页面中或入口js里require("angular-bootstrap")，就可以使用angular程序了。
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+   
+		
+	

@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+
+<div ng-controller="TestCtrl">
+	<div style="width: 100px; height: 10px; background-color: red"></div>
+	<input type="text" name="width" ng-model="width" />
+</div>
+
+
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/angular.min.js"></script>
+
+<!--
+<script type="text/javascript" charset="utf-8">
+	var TestCtrl = function($scope){
+		$scope.width = 100;
+	}
+	angular.bootstrap(document.documentElement);
+</script>
+-->
+
+<script type="text/javascript" charset="utf-8">
+	var TestCtrl = function($scope){
+		$scope.style = {width: 100 + 'px'};
+	}
+	angular.bootstrap(document.documentElement);
+</script>

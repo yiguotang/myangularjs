@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<meta charset="utf-8">
+		<title>计算总价</title>
+	</head>	
+	<body>
+		<div ng-controller="invoiceCntl">
+			<b>invoice</b>
+			<br>
+			<br>
+			<table>
+				<tr>
+					<th>数量</th>
+					<th>价格</th>
+				</tr>
+
+				<tr>
+					<td>
+						<input type="number" min="0" ng-model="qty" ng-value="{{qty}}" required />	
+					</td>
+					<td>
+						<input type="number" ng-model="cost" ng-value="{{cost}}" required />  
+					</td>
+				</tr>
+			</table>
+			
+			<hr/>
+			<b>总价:</b><span ng-bind="qty * cost | currency"></span>
+		</div>
+
+		<script src="js/angular.min.js"></script>
+		<script>
+			function invoiceCntl($scope)
+			{
+				$scope.qty = 1;
+				$scope.cost = 19.96;
+			}
+		</script>
+	</body>
+</html>

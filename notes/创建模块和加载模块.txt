@@ -1,0 +1,3 @@
+使用angular.module('myModule', []);
+将创建名为myModule的模块并重写已有的同名模块
+而使用angular.module('myModule');则会获取已有的模块实例

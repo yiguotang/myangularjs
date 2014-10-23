@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>select-demo隐藏或显示</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div ng-controller="DateController">
+		<div>
+			<input type="text" ng-model="a" ng-show="isShow" ng-init="isShow = true"/><span ng-bind="a"></span>
+		</div>
+		<button ng-click="show()">点我隐藏/显示输入框！</button>
+	</div>	
+
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("myApp", []);
+
+		app.controller('DateController', function($scope){
+			$scope.show = function(){
+				$scope.isShow = !$scope.isShow;
+				console.log($scope.isShow);
+			};
+		});
+	</script>
+</body>
+</html>

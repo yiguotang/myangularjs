@@ -1,0 +1,7 @@
+1. HTML Parser&Directives
+	指令是用来定义HTML标签
+2. Two way Data-Binding
+
+3. Dependency Injection
+
+4. Module&Controller&Service

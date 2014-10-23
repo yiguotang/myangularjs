@@ -1,0 +1,22 @@
+<html ng-app>
+	<head>
+		<meta charset="utf-8"/>
+		<title>enabled/disabled button</title>
+	</head>
+	<body>
+		
+		<div ng-controller="DeathrayMenuController">
+			<button ng-disabled="isDisabled" ng-init="isDisabled = 'true'">submit:<span ng-bind="!isDisabled"></span></button>
+			<button ng-click="stun()">enabled/disabled submit button</button>
+		</div>
+
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript">
+			function DeathrayMenuController($scope){
+				$scope.stun = function(){
+					$scope.isDisabled = !$scope.isDisabled;
+				};
+			}
+		</script>
+	</body>
+</html>

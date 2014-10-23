@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>显示/隐藏html元素</title>
+</head>
+
+<body>
+
+    <div ng-app="" ng-controller="personController">
+
+        <button ng-click="toggle()">显示/隐藏</button>
+
+        <p ng-show="myVar">
+            名：
+            <input type="text" ng-model="person.firstName" />
+            </br>
+            姓：
+            <input type="text" ng-model="person.lastName" />
+            <br/>
+            <br/>姓名：<span ng-bind="person.lastName + ' ' + person.firstName"></span>
+        </p>
+
+    </div>
+
+    <script>
+    function personController($scope) {
+        $scope.person = {
+            firstName: "san",
+            lastName: "zhang"
+        };
+
+        $scope.myVar = true;
+
+        <!-- 函数的作用是将myVar的值在true和false之间切换 -->
+        $scope.toggle = function() {
+            $scope.myVar = !$scope.myVar;
+        };
+    }
+    </script>
+
+    <script src="js/angular.min.js"></script>
+
+</body>
+
+</html>

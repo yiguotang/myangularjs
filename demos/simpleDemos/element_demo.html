@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="">
+	<head>
+		<meta charset="utf-8" />
+		<title>几个ng指令</title>
+	</head>
+	<body>
+		
+	
+		<!-- ng-repeat重复HTML元素 -->
+		<div ng-init="a=[1,2,3,4];">
+			<ul ng-repeat="member in a">
+				<li>{{ member }}</li>
+			</ul>
+		</div>
+
+		<!-- ng-style样式 -->
+		<div ng-style="{width: 100 + 'px', height: 100 + 'px', backgroundColor: 'red'}">
+		</div>
+
+		<ul ng-init="l=[1, 2, 3, 4, 5]">
+			<li ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="m in l">{{m}}</li>
+		</ul>
+
+		<!-- ng-switch根据一个值来决定哪个节点显示，其它节点移除-->
+		<div ng-init="a=2">
+			<ul ng-switch on="a">
+				<li ng-switch-when="1">1</li>
+				<li ng-switch-when="2">2</li>
+				<li ng-switch-default>other</li>
+			</ul>
+		</div>
+
+		<p ng-click="click($event)">点击</p>
+		<p ng-click="click($event.target)">点击</p>
+		
+		<!--form表单的验证-->
+		<form name="test_form" ng-controller="TestCtrl">
+			<input type="text" name="a" required ng-model="a" />
+			<input type="text" name="b" required ng-model="b" ng-minlength="2" />
+			<span ng-click="see()">{{ test_form.$error }}</span><br>
+			<input type="checkbox" name="c" ng-model="c" ng-true-value="AA" ng-false-value="BB" />
+			<span>{{c}}</span>
+		</form>
+		
+
+
+		<script src="js/angular.min.js"></script>
+
+		<script>
+			var TestCtrl = function($scope){
+				$scope.see = function(){
+					console.log($scope.test_form.$error);
+				}
+
+				$scope.c = "AA";
+			}
+		</script>
+
+	</body>
+</html>

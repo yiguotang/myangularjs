@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en" ng-app="github">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="styles/bootstrap.css"/>
+</head>
+<body>
+    <header>GitHub</header>
+
+    <div butterbar>Loading...</div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <div id="focus"><a href="#/new">New Recipe</a></div>
+                <div><a href="#/">Recipe List</a></div>
+            </div>
+            <div class="span10">
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/vendor/angular.min.js"></script>
+    <script src="scripts/vendor/angular-resource.min.js"></script>
+    <script src="scripts/vendor/angular-route.min.js"></script>
+    <script src="scripts/directives/directives.js"></script>
+    <script src="scripts/services/services.js"></script>
+    <script src="scripts/controllers/controllers.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+.leftNav>dl>dt>span,.leftNav>dl>dd>span{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.HBlist{
+    left:inherit;
+}
+.mainBox .navBox .historyBox .HBlist dd{
+    width: 100%;
+}
+
+.topHead .THtool li.message .messageShow li {
+    width: 100%;
+}
+
+.topHead .THtool li.message .messageShow h3.title{
+    margin: 0;
+}

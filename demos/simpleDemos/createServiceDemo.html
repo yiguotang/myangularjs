@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html ng-app="mainApp">
+	<head>
+		<meta charset="utf-8">
+		<title>自定义一个服务</title>
+	</head>
+	<body>
+		<div ng-controller="MyController">
+			<input type="text" ng-model="msg" />
+			<button ng-click="saveMsg()">Save msg</button>
+			<ul>
+				<li ng-repeat="msg in msgs"><span ng-bind="msg"></span></li>
+			</ul>
+		</div>
+
+		<script src="js/angular.min.js"></script>
+		<script type="text/javascript">
+			var app = angular.module("mainApp", [], function($provide){
+				$provide.factory('notify', ['$window', '$timeout', function(win, timeout){
+					var msgs = [];
+					return function (msg){
+						msgs.push(msg);
+						if (msgs.length == 3) {
+							timeout(function(){
+								win.alert(msgs.join("\n"));
+								msgs = [];
+							}, 10);
+						};
+					};
+				}])
+			});
+
+			//向controller中注入服务，采用显式方式
+			function MyController($scope, $noti){
+				$scope.msgs = [];
+				$scope.saveMsg = function(){
+					this.msgs.push(this.msg);
+					$noti(this.msg);
+					this.msg = "";
+				};
+			};
+
+			MyController.$inject = ['$scope', 'notify'];
+		</script>
+	</body>
+</html>

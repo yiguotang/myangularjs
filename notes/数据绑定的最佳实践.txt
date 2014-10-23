@@ -1,0 +1,2 @@
+相对于绑定对象，更好的绑定石绑定数据的属性
+ng-bind="clock" --> ng-bind="clock.now"

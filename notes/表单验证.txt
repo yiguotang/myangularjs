@@ -1,0 +1,134 @@
+input元素的所有验证项：
+	·必填项：required
+		<input type="text" required />
+
+	·最小、最大长度：ng-minlength，ng-maxlength
+		<input type="text" ng-minlength="5" />
+		<input type="text" ng-maxlength="20" />
+
+	·模式匹配：ng-pattern="/PATTERN/"，使用的是正则
+		<input type="text" ng-pattern="[a-zA-Z]" />
+
+	·电子邮件：email
+		<input type="email" name="email" ng-model="user.email" />
+
+	·数字：number		
+		<input type="number" name="age" ng-model="user.age" />
+
+	·URL：url
+		<input type="url" name="homepage" ng-model="user.facebook_url" />
+
+	·自定义验证
+
+	·在表单中控制变量
+		·未修改的表单，若未修改返回true，修改则返回false
+			formName.inputFieldName.$pristine
+		·修改过的表单，只要用户修改过表单，无论输入是否通过验证，该值都返回true
+			formName.inputFieldName.$dirty
+		·合法的表单，判读表单的内容是否合法，合法则返回true，反之亦然
+			formName.inputFieldName.$valid
+		·不合法的表单，不合法返回true
+			formName.inputFieldName.$invalid
+		·错误，它包含当前表单的所有验证内容，以及它们是否合法的信息
+			formName.inputfieldName.$error
+			如果验证失败，这个属性的值为 true ；如果值为 false ，说明输入字段的值通过了验证
+
+	·一些css样式
+		AngularJS处理表单时，会根据表单当前的状态添加一些CSS类（例如当前是合法的、未发生
+		变化的，等等），这些CSS类的命名和前面介绍的属性很相似。
+		它们包括：
+			.ng-pristine {}
+			.ng-dirty {}
+			.ng-valid {}
+			.ng-invalid {}
+		它们对应着表单输入字段的特定状态。
+		当某个字段中的输入非法时， .ng-invlid类会被添加到这个字段上。当前例子中的站点将
+		对应的CSS样式设置为：
+			input.ng-invalid {
+				border: 1px solid red;
+			}
+				input.ng-valid {
+				border: 1px solid green;
+			}
+
+	表单验证有两个时机：
+		1.表单提交的时候，formName.submitted为true时，错误信息会显示
+
+		app.controller('signupController', function($scope){
+			$scope.submitted = false;
+			$scope.signupForm = function(){
+				if($scope.signup_form.$valid){
+					//正常提交
+				}
+				else
+				{
+					$scope.signup_form.submitted = true;
+				}
+			}
+		})
+
+		2.表单元素的输入完成时，即失焦后显示验证信息		
+		app.directive('ngFocus', [function(){
+			var FOCUS_CLASS = 'ng-focused',
+			return {
+				restrict : 'A',
+				require : 'ngModel',
+				link : function(scope, element, attrs, ctrl){
+					ctrl.$focused = fasle;
+					element.bind('focus', function(evt){
+						element.addClass(FOCUS_CLASS);
+						scope.$apply(function(){
+							ctrl.$focused = true;
+						});
+					}).bind('blur', function(evt){
+						element.removeClass(FOCUS_CLASS);
+						scope.$focused = false;
+					})
+				}
+			};
+		}])		
+
+	使用ngMessages，首先要在HTML中引入angular-message.js，
+		<script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
+	然后告诉Angular将其作为应用程序引入
+		angular.module('myApp', ['ngMessages']);
+	在html中可以这样写：
+
+		<form name="signup_form" novalidate ng-submit="signupForm()" ng-controller="signupController">
+			<label>Your name</label>
+			<input type="text" placeholder="Name" name="name" ng-model="signup.name" ng-minlength=3 ng-maxlength=20 required />
+			<div class="error" ng-messages="signup_form.name.$error">
+				<div ng-message="required">Make sure you enter your name</div>
+				<div ng-message="minlength">Your name must be at least 3 characters</div>
+				<div ng-message="maxlength">Your name cannot be longer than 20 characters</div>
+			</div>
+			<button type="submit">Submit</button>
+		</form>
+
+	这个实现，一次只会显示一个错误消息。当需要同时显示所有错误消息，在ng-message指令后面加入一个 ng-messages-multiple 即可
+
+	错误信息的模板可以用ng-message-include属性进行导入操作
+		<div class='error' ng-messages="signup_form.name.$error" ng-messages-include="templates/errors.html"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+文本框的验证：
+  <input type="text" name="title" required class="form-control" ng-model="detail.Title" />
+  <span ng-show="dialogPublishForm.title.$invalid && submitStatus">请输入招聘标题</span> 

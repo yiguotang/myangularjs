@@ -1,0 +1,22 @@
+<html ng-app>
+	<head>
+		<meta charset="utf-8"/>
+		<title>setScopeFromExpression</title>
+	</head>
+	<body>		
+		<div ng-controller="CountController">
+			<span ng-bind="count"></span>
+			<button ng-click="count = 3">Count Three</button>
+			<button ng-click="setCount()">Set count to Three</button>
+		</div>
+
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript">
+			function CountController($scope){
+				$scope.setCount = function(){
+					$scope.count = 4;
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>计算总价</title>
+    </head>
+    <body>
+        <div ng-app="" ng-controller="costController">
+            数量: <input type="number" ng-model="quantity" ng-value="quantity">
+            价格: <input type="number" ng-model="price" ng-value="price">
+            <p>总价 = <span ng-bind="quantity * price | currency:'￥'"></span></p>
+        </div>
+
+        <script src="js/angular.min.js"></script>
+        <script>
+        function costController($scope) {
+            $scope.quantity = 1;
+            $scope.price = 9.99;
+        }
+        </script>
+    </body>
+</html>
+			

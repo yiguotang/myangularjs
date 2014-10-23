@@ -1,0 +1,11 @@
+statup - 依旧是hello world...改为Hello Kitty！
+runtime - 介绍angular的runtime
+scope - view与contorller的纽带（神马glue...胶）
+controller - app的行为(application behavior)
+model - app的数据
+view - 用户所看到的东东
+directives - HTML的语法扩展
+filters - 根据用户的本地格式，格式化数据
+injector - 加载我们的app（依赖管理之类）
+module - 配置injector
+$ - angular的命名空间（namespace）

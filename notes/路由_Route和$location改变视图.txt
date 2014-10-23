@@ -1,0 +1,19 @@
+1.Route 可以为一个给定的浏览指向URL, 详细指定 Angular 能够加载和显示一个模板，实例化一个控制器为模板提供上下文
+  伪代码：
+  var someModule = angular.module ('someModule', [... module dependencies ...]);
+  someModule. config (function($routeProvider)
+  {
+    $routeProvider
+    .when ('url', {controller:aController, templateUrl:'/path/to/tempate'})
+    .when (... other mappings for your  app ...)
+    .
+    …
+    .otherwise(... what to do if nothing else  matches ...);
+  )};
+
+
+2.使用路由的注意点：
+  ①路由需要依赖$routeProvider服务，这个千万不要忘了；
+  ②基本语法是：when..when..otherwise，当when中没有匹配到任何项的时候，路由跳到otherwise中；
+  ③如果你决定用路由，记得引入angular-route.js文件；
+  ④一旦应用了路由，html中就不要写ng-controller了，直接在when中定义即可。
