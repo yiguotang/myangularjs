@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="uploadApp">
+<head>
+	<meta charset="UTF-8">
+	<title>uploading file</title>
+	<link rel="stylesheet" href="styles/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/bootstrap-responsive.css">
+</head>
+<body>
+	<div class="container" ng-controller="AppController" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+		select multiple files: <input type="file" nv-file-select="" uploader="uploader" multiple><br/>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>fileName</th>
+					<th ng-show="uploader.isHTML5">size</th>
+					<th ng-show="uploader.isHTML5">progress</th>
+					<th>state</th>
+					<th>operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in uploader.queue">
+					<td>
+						<strong>{item.file.name}</strong>
+					</td>
+
+					<td ng-show="uploader.isHTML5" nowrap> {{item.file.size/1024/1024/number:2}}MB</td>
+
+					<td ng-show="uploader.isHTML5">
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" ng-style="{'width':item.progress + '%'}"></div>
+						</div>
+					</td>
+					
+					<td class="text-center">
+						<span ng-show="item.isSuccess">success</span>
+						<span ng-show="item.isCancel">failure</span>
+						<span ng-show="item.isError">wrong</span>
+					</td>
+
+					<td nowrap>
+						<button class="btn btn-success btn-xs" type="button" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">uploading</button>
+						<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">cancel</button>
+						<button class="btn btn-danger btn-xs" type="button" ng-click="item.remove()">remove</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div>
+			<div>progressing
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" ng-style="{ 'width':uploader.progress + '%'}"></div>
+				</div>
+			</div>
+
+			<button class="btn btn-success btn-s" type="button" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">uploadAll</button>
+
+			<button class="btn btn-success btn-s" type="button" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">cancelAll</button>
+
+			<button class="btn btn-success btn-s" type="button" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">removeAll</button>
+		</div>
+		
+
+	</div>
+</body>
+<script src="scripts/angular.js"></script>
+<script src="scripts/jquery-1.8.3.js"></script>
+<script src="scripts/angular-file-upload.js"></script>
+<script src="scripts/controllers.js"></script>
+</html>

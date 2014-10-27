@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="routerApp">
+<head>
+	<meta charset="UTF-8">
+	<title>the second demo of ui-router</title>
+	<link rel="stylesheet" href="styles/bootstrap.css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li>
+				<a ui-sref="home">Home</a>
+			</li>
+			<li>
+				<a ui-sref="about">About</aHome>
+			</li>
+		</ul>
+	</nav>
+
+	<div class="container">
+		<div ui-view></div>
+	</div>
+
+	<script src="scripts/angular.min.js"></script>
+	<script src="scripts/angular-animate.js"></script>
+	<script src="scripts/angular-ui-router.js"></script>
+	<script>
+		var routerApp = angular.module('routerApp', ['ui.router']);
+
+		routerApp.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+			$urlRouterProvider.otherwise('/home');
+
+			$stateProvider
+				.state('home', {
+					url: '/home',
+					templateUrl:'tpls2/home.html'
+				})
+				.state('home.list', {
+					url: '/list',
+					templateUrl: 'tpls2/home-list.html',
+					controller: function($scope){
+						$scope.topics = ['Butterscotch', 'BlackCurrent', 'Mango'];
+					}
+				})
+				.state('home.paragraph', {
+					url: '/paragraph',
+					template:'I could sure use a scoop of ice-cream.'
+				})
+				.state('about', {
+					url: '/about',
+					views:{
+						'':{
+							templateUrl:'tpls2/about.html'
+						},
+						'columnOne@about':{
+							template:'Here is the first column content.'
+						},
+						'columnTwo@about':{
+							templateUrl: 'tpls2/table-data.html',
+							controller: 'Controller'
+						}
+					}
+				})
+		}]);
+
+		routerApp.controller('Controller', ['$scope', function($scope){
+			$scope.message = 'test';
+
+			$scope.topics = [{
+				name: 'Butterscotch',
+				price: 50
+			}, {
+				name:'BlackCurrent',
+				price: 100
+			}, {
+				name:'Mango',
+				price: 20
+			}];
+		}])
+	</script>
+</body>
+</html>
